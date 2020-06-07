@@ -1,0 +1,2 @@
+environment: development
+http_addr: :8080
