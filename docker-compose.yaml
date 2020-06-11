@@ -8,6 +8,7 @@ services:
             - .:/code
         command:
             - translator-api
+            - serve
             - --config=/code/config.production.yaml
     redis:
         image: 'redis:6'
