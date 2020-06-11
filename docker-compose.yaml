@@ -7,7 +7,7 @@ services:
         volumes:
             - .:/code
         command:
-            - app
+            - translator-api
             - --config=/code/config.production.yaml
     redis:
         image: 'redis:6'

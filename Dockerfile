@@ -5,4 +5,4 @@ COPY . .
 
 RUN go install -v ./...
 
-CMD ["app"]
+CMD ["translator-api"]
