@@ -6,8 +6,8 @@ services:
             - '8080:8080'
         volumes:
             - .:/code
-        args:
-            - --config
-            - /code/config.production.yaml
+        command: :
+            - app
+            - --config=/code/config.production.yaml
     redis:
         image: 'redis:6'
