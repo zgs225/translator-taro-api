@@ -10,5 +10,15 @@ services:
             - translator-api
             - serve
             - --config=/code/config.production.yaml
+    api2:
+        build: .
+        ports:
+            - '8081:8080'
+        volumes:
+            - .:/code
+        command:
+            - translator-api
+            - serve
+            - --config=/code/config.production.yaml
     redis:
         image: 'redis:6'
