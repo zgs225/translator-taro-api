@@ -17,7 +17,9 @@ var serveCmd = &cobra.Command{
 		router := app.Group("/v1/api")
 
 		router.GET("/ping", endpoints.EndpointPing)
-		router.GET("/youdao", endpoints.EndpointYoudaoQuery)
+
+		edps := &endpoints.YoudaoEndpoints{App: app}
+		router.GET("/youdao", edps.CreateQueryEndpoint())
 
 		app.Run()
 	},
