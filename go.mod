@@ -8,7 +8,6 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/golang/groupcache v0.0.0-20190129154638-5b532d6fd5ef
-	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/json-iterator/go v1.1.10
 	github.com/onsi/ginkgo v1.12.3 // indirect
 	github.com/sirupsen/logrus v1.6.0
