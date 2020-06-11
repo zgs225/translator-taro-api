@@ -2,12 +2,14 @@ package endpoints
 
 import (
 	"fmt"
+	"math"
 	"net/http"
 	"translator-api/app"
 	"translator-api/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
+	"github.com/golang/groupcache/lru"
 	"github.com/spf13/viper"
 )
 
@@ -33,6 +35,11 @@ func getYoudaoService(app *app.Application) services.YoudaoService {
 			}
 
 			_youdaoSvc = services.NewRedisCachedYoudaoServiceMiddleware(redisClient, app)(_youdaoSvc)
+		}
+
+		if viper.GetBool("cache.lru") {
+			cache := lru.New(int(math.Max(100, viper.GetFloat64("lru.size"))))
+			_youdaoSvc = services.NewMemoryCachedYoudaoService(cache, app)(_youdaoSvc)
 		}
 	}
 	return _youdaoSvc

@@ -7,6 +7,10 @@ youdao:
 
 cache:
   redis: true
+  lru: true
+
+lru:
+  size: 1000
 
 redis:
   host: '127.0.0.1'

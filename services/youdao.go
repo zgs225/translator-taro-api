@@ -9,6 +9,7 @@ import (
 	"translator-api/hash"
 
 	"github.com/go-redis/redis"
+	"github.com/golang/groupcache/lru"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/zgs225/youdao"
 )
@@ -74,7 +75,7 @@ func (s *RedisCachedYoudaoService) Query(q string) (*youdao.Result, error) {
 	}
 
 	if len(str) == 0 {
-		s.core.Logger.Debug("Cache miss: ", q, " by key: ", key)
+		s.core.Logger.Debug("Redis cache miss: ", q, " by key: ", key)
 		result, err := s.next.Query(q)
 		if err != nil {
 			return nil, err
@@ -90,8 +91,43 @@ func (s *RedisCachedYoudaoService) Query(q string) (*youdao.Result, error) {
 		return result, nil
 	}
 
-	s.core.Logger.Debug("Cache hit: ", q, " by key: ", key)
+	s.core.Logger.Debug("Redis cache hit: ", q, " by key: ", key)
 	result := youdao.Result{}
 	err = json.Unmarshal([]byte(str), &result)
 	return &result, err
+}
+
+// MemoryCachedYoudaoService 内存缓存
+type MemoryCachedYoudaoService struct {
+	cache *lru.Cache
+	core  *app.Application
+	next  YoudaoService
+}
+
+// NewMemoryCachedYoudaoService 内存缓存中间件
+func NewMemoryCachedYoudaoService(cache *lru.Cache, core *app.Application) YoudaoServiceMiddleware {
+	return func(next YoudaoService) YoudaoService {
+		return &MemoryCachedYoudaoService{
+			cache: cache,
+			core:  core,
+			next:  next,
+		}
+	}
+}
+
+// Query 在内存中查询
+func (s *MemoryCachedYoudaoService) Query(q string) (*youdao.Result, error) {
+	key := "yd:lru:" + hash.SHA256(q)
+	v, ok := s.cache.Get(lru.Key(key))
+	if ok {
+		s.core.Logger.Debug("LRU cache hit: ", q, " by key: ", key)
+		return v.(*youdao.Result), nil
+	}
+	s.core.Logger.Debug("LRU cache miss: ", q, " by key: ", key)
+	result, err := s.next.Query(q)
+	if err != nil {
+		return nil, err
+	}
+	s.cache.Add(key, result)
+	return result, nil
 }
