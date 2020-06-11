@@ -140,6 +140,10 @@ github.com/ugorji/go/codec v1.1.7 h1:2SvQaVZ1ouYrrKKwoSk2pzd4A9evlKJb9oTL+OaLUSs
 github.com/ugorji/go/codec v1.1.7/go.mod h1:Ax+UKWsSmolVDwsd+7N3ZtXu+yMGCf907BLYF3GoBXY=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
+github.com/zgs225/youdao v0.0.0-20171201074219-ca89ae855b7c h1:Yfx649I+pzP7lMtzCHcWzvMm+m5MP1x6puI1mGaRy/4=
+github.com/zgs225/youdao v0.0.0-20171201074219-ca89ae855b7c/go.mod h1:rih1RGj2tv0E/hVuXT3ajcQgd93FBIFmvxeJCM/PF8Q=
+github.com/zgs225/youdao v1.0.0 h1:gxe351UEzbH6kwYjAr+4uhE5E7o8EE9A/iXyap/IYwI=
+github.com/zgs225/youdao v1.0.0/go.mod h1:7AaoXu+UWEr27KVzbHUZ62ijydPXxL6pX/wIRMO2viA=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
 go.uber.org/atomic v1.4.0/go.mod h1:gD2HeocX3+yG+ygLZcrzQJaqmWj9AIm7n08wl/qW/PE=
 go.uber.org/multierr v1.1.0/go.mod h1:wR5kodmAFQ0UK8QlbwjlSNy0Z68gJhDJUG5sjR94q/0=

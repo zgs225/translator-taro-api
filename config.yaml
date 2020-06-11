@@ -1,2 +1,5 @@
 environment: development
 http_addr: :8080
+youdao:
+  app_id: 55f6b4a5233a7863
+  app_key: rlAijgxZuVbSPtUxclB2BgZ5zF0baKpx
