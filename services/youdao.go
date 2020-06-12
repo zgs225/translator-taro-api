@@ -45,6 +45,7 @@ func NewBasicYoudaoService(appID, appSecret string) YoudaoService {
 // Query 使用有道 API 查询
 func (s *basicYoudaoService) Query(q string) (*youdao.Result, error) {
 	client := s.pool.Get().(*youdao.Client)
+	defer s.pool.Put(client)
 	return client.Query(q)
 }
 
