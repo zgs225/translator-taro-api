@@ -17,6 +17,9 @@ type TTSService interface {
 	Speak(text, lang string) (string, error)
 }
 
+// TTSServiceMiddleware 语音合成服务中间件
+type TTSServiceMiddleware func(TTSService) TTSService
+
 // AWSPollyTTSService 亚马逊 Polly 语音合成
 type AWSPollyTTSService struct {
 	Region string

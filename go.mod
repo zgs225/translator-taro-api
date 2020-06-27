@@ -4,6 +4,8 @@ go 1.14
 
 require github.com/mitchellh/go-homedir v1.1.0
 
+require github.com/qiniu/api.v7/v7 v7.4.1
+
 require (
 	github.com/aws/aws-sdk-go v1.32.10
 	github.com/gin-gonic/gin v1.6.3
@@ -11,7 +13,6 @@ require (
 	github.com/golang/groupcache v0.0.0-20190129154638-5b532d6fd5ef
 	github.com/json-iterator/go v1.1.10
 	github.com/onsi/ginkgo v1.12.3 // indirect
-	github.com/qiniu/api.v7 v7.2.5+incompatible // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.4.0
