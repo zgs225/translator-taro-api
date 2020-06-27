@@ -11,9 +11,11 @@ require (
 	github.com/golang/groupcache v0.0.0-20190129154638-5b532d6fd5ef
 	github.com/json-iterator/go v1.1.10
 	github.com/onsi/ginkgo v1.12.3 // indirect
+	github.com/qiniu/api.v7 v7.2.5+incompatible // indirect
 	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.4.0
 	github.com/zgs225/youdao v1.0.0
+	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
 )

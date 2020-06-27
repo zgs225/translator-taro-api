@@ -58,3 +58,6 @@ Temporary Items
 
 ### Air ###
 tmp/
+
+### Config files ###
+config*.yaml
