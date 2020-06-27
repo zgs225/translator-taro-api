@@ -5,6 +5,7 @@ go 1.14
 require github.com/mitchellh/go-homedir v1.1.0
 
 require (
+	github.com/aws/aws-sdk-go v1.32.10
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/golang/groupcache v0.0.0-20190129154638-5b532d6fd5ef
