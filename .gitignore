@@ -62,3 +62,4 @@ tmp/
 ### Config files ###
 config*.yaml
 services/qbox_test.go
+credentials
