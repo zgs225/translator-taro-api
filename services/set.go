@@ -15,6 +15,14 @@ type RedisSet struct {
 	client *redis.Client
 }
 
+// NewRedisSet 初始化基于 Redis 的集合
+func NewRedisSet(k string, c *redis.Client) *RedisSet {
+	return &RedisSet{
+		key:    k,
+		client: c,
+	}
+}
+
 // Exists 在 Redis 集合中检查是否存在元素
 func (s *RedisSet) Exists(v interface{}) bool {
 	cmd := s.client.SIsMember(s.key, v)

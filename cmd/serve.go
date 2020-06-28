@@ -18,8 +18,14 @@ var serveCmd = &cobra.Command{
 
 		router.GET("/ping", endpoints.EndpointPing)
 
-		edps := &endpoints.YoudaoEndpoints{App: app}
-		router.GET("/youdao", edps.CreateQueryEndpoint())
+		{
+			edps := &endpoints.YoudaoEndpoints{App: app}
+			router.GET("/youdao", edps.CreateQueryEndpoint())
+		}
+
+		{
+			router.POST("/tts", endpoints.NewTTSEndpoint(app))
+		}
 
 		app.Run()
 	},

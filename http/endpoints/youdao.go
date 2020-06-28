@@ -1,14 +1,12 @@
 package endpoints
 
 import (
-	"fmt"
 	"math"
 	"net/http"
 	"translator-api/app"
 	"translator-api/services"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis"
 	"github.com/golang/groupcache/lru"
 	"github.com/spf13/viper"
 )
@@ -22,18 +20,7 @@ func getYoudaoService(app *app.Application) services.YoudaoService {
 		_youdaoSvc = services.NewBasicYoudaoService(appID, appKey)
 
 		if viper.GetBool("cache.redis") {
-			redisClient := redis.NewClient(&redis.Options{
-				Addr:         fmt.Sprintf("%s:%d", viper.GetString("redis.host"), viper.GetInt("redis.port")),
-				DB:           viper.GetInt("redis.db"),
-				Password:     viper.GetString("redis.password"),
-				PoolSize:     50,
-				MinIdleConns: 25,
-			})
-
-			if err := redisClient.Ping().Err(); err != nil {
-				app.Logger.Panic(err)
-			}
-
+			redisClient := services.MustGetRedisClient()
 			_youdaoSvc = services.NewRedisCachedYoudaoServiceMiddleware(redisClient, app)(_youdaoSvc)
 		}
 

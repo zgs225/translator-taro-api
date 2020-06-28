@@ -14,6 +14,7 @@ import (
 // QBox 七牛服务
 type QBox interface {
 	UploadFile(local string, key ...string) (*storage.PutRet, error)
+	MakePrivateURL(key, domain string, duration time.Duration) string
 }
 
 // SimpleQBox 实现基本的七牛服务
@@ -96,6 +97,12 @@ func (q *SimpleQBox) UploadFile(local string, key ...string) (ret *storage.PutRe
 	}
 
 	return ret, err
+}
+
+// MakePrivateURL 生成私有空间访问链接
+func (q *SimpleQBox) MakePrivateURL(key, domain string, duration time.Duration) string {
+	mac := qbox.NewMac(q.accessKey, q.secretKey)
+	return storage.MakePrivateURL(mac, domain, key, time.Now().Add(duration).Unix())
 }
 
 func (q *SimpleQBox) getToken() string {
