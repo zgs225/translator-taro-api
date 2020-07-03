@@ -7,8 +7,6 @@ services:
         volumes:
             - .:/code
             - ./credentials:/root/.aws/credentials
-        deploy:
-            replicas: 2
         command:
             - translator-api
             - serve
