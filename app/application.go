@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"github.com/zgs225/go-ecdict/dict"
 )
 
 const (
@@ -19,6 +20,8 @@ type Application struct {
 	Logger      *logrus.Logger
 	Environment string
 
+	Dict dict.Interface
+
 	httpServer     *gin.Engine
 	initHooks      []ApplicationHook
 	beforeRunHooks []ApplicationHook
@@ -26,7 +29,7 @@ type Application struct {
 }
 
 // ApplicationHook 生命周期中调用的钩子函数
-type ApplicationHook func(Application) error
+type ApplicationHook func(*Application) error
 
 // Default 返回默认的应用
 func Default() *Application {
@@ -67,6 +70,12 @@ func Default() *Application {
 
 	o.httpServer = gin.Default()
 
+	// initlizers
+	o.initHooks = append(
+		o.initHooks,
+		initHookECDict,
+	)
+
 	return o
 }
 
@@ -77,10 +86,14 @@ func (o *Application) Group(path string, handlers ...gin.HandlerFunc) *gin.Route
 
 // Run 运行服务
 func (o *Application) Run() {
+	for _, fn := range o.initHooks {
+		if err := fn(o); err != nil {
+			panic(err)
+		}
+	}
+
 	errc := make(chan error)
-
 	go func() { errc <- o.runHTTPServer() }()
-
 	o.Logger.Panic(<-errc)
 }
 

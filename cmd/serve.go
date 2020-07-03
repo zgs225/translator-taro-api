@@ -21,6 +21,7 @@ var serveCmd = &cobra.Command{
 		{
 			edps := &endpoints.YoudaoEndpoints{App: app}
 			router.GET("/youdao", edps.CreateQueryEndpoint())
+			router.GET("/suggest", endpoints.NewSuggestionEndpoint(app))
 		}
 
 		{
